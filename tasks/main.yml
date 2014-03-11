@@ -1,0 +1,7 @@
+---
+  - include: locale.yml
+    when: skip_locale != true 
+  - include: ide.yml
+    when: skip_ide != true 
+  - include: vagrant.yml
+  - include: dotfiles.yml

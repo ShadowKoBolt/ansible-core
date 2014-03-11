@@ -1,0 +1,25 @@
+---
+  - name: duplicate keys
+    shell: cp -fv /home/master/.ssh/*id_rsa* /home/vagrant/.ssh 
+
+  - name: set owner of .ssh to vagrant
+    shell: chown -Rv vagrant:vagrant /home/vagrant/.ssh
+  
+  - name: symbolic link gitconfig from master to vagrant
+    shell: ln -fvs /home/master/.gitconfig /home/vagrant/.gitconfig
+
+  - name: symbolic link configs from dotfiles
+    shell: ln -fvs /home/master/dotfiles/{{ item }} /home/vagrant/.{{ item }}
+    with_items: 
+      - tmx
+      - gitignore
+      - bash
+      - vim
+      - ackrc
+      - bashrc
+      - bash_profile
+      - tmux.conf
+      - vimrc
+      - gemrc
+
+
