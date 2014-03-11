@@ -1,4 +1,4 @@
-Role Name
+Core
 ========
 
 Install llama dotfiles (https://github.com/llamadigital/dotfiles.git), installs IDE packages (used in dotfiles) and sets locale to GB
