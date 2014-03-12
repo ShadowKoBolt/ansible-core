@@ -1,7 +1,17 @@
 ---
-  - include: locale.yml
+  # Vars
+  - include_vars: "{{ distro }}/main.yml"
+  
+  # Locale
+  - include: "{{ distro }}/locale.yml"
     when: skip_locale != true 
+
+  # IDE
   - include: ide.yml
     when: skip_ide != true 
+
+  # Vagrant
   - include: vagrant.yml
+
+  # Dotfiles
   - include: dotfiles.yml

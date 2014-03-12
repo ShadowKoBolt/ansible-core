@@ -9,6 +9,5 @@
     command: /bin/cp /usr/share/zoneinfo/{{ timezone }} /etc/localtime
 
   - name: set /etc/timezone to {{ timezone }}
-    template: src=timezone dest=/etc/timezone
+    template: src=../../templates/timezone dest=/etc/timezone
     notify: update tzdata
-
