@@ -1,25 +1,27 @@
 ---
-  - name: duplicate keys
-    shell: cp -fv /home/master/.ssh/*id_rsa* /home/vagrant/.ssh 
+  - name: copy ssh keys from local to remote
+    copy: src=~/.ssh/{{ item }} dest=/home/vagrant/.ssh owner=vagrant
+    with_items:
+      - id_rsa
+      - id_rsa.pub
 
-  - name: set owner of .ssh to vagrant
-    shell: chown -Rv vagrant:vagrant /home/vagrant/.ssh
-  
-  - name: symbolic link gitconfig from master to vagrant
-    shell: ln -fvs /home/master/.gitconfig /home/vagrant/.gitconfig
+  - name: copy gitconfig from local to remote
+    copy: src=~/.gitconfig dest=/home/vagrant owner=vagrant
+
+  - name: copy dotfiles from local to remote
+    copy: src=~/{{ item }} dest=/home/vagrant/ owner=vagrant
+    with_items: 
+      - .tmx
+      - .gitignore
+      - .ackrc
+      - .bashrc
+      - .bash_profile
+      - .tmux.conf
+      - .vimrc
+      - .gemrc
 
   - name: symbolic link configs from dotfiles
-    shell: ln -fvs /home/master/dotfiles/{{ item }} /home/vagrant/.{{ item }}
+    file: src=/home/master/dotfiles/{{ item }} dest=/home/vagrant/.{{ item }} state=link
     with_items: 
-      - tmx
-      - gitignore
       - bash
       - vim
-      - ackrc
-      - bashrc
-      - bash_profile
-      - tmux.conf
-      - vimrc
-      - gemrc
-
-
