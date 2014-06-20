@@ -12,6 +12,8 @@
 
   # Vagrant
   - include: vagrant.yml
+    when: dev == true
 
   # Dotfiles
   - include: dotfiles.yml
+    when: dev == true
